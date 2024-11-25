@@ -1,2 +1,1 @@
-[processes]
-web = "gunicorn kangbersih.wsgi:application --log-file -"
+web: gunicorn kangbersih.wsgi --log-file -
