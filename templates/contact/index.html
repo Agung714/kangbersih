@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Kontak Kami{% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<section class="flex flex-col items-center justify-center px-5 py-10">
+  <h1 class="text-4xl font-semibold mb-2">Kontak Kami</h1>
+  <p class="text-lg text-gray-600 mb-10">Lorem ipsum dolor sit amet consectetur. Purus commodo pulvinar.</p>
+
+  <div class="flex flex-col sm:flex-row items-center gap-10">
+    <div>
+      <!-- Embedded Google Map -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.848816733605!2d117.16964711585277!3d-0.49895363230826807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df67ea6617c5355%3A0x76a7fdfc63996ac9!2sJl.%20Pangeran%20Suryanata%2C%20Air%20Putih%2C%20Samarinda%20Ulu%2C%20Kota%20Samarinda%2C%20Kalimantan%20Timur%2075124!5e0!3m2!1sen!2sid!4v1666206179945!5m2!1sen!2sid" 
+              width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="text-center sm:text-left">
+      <p>
+        <strong>📍 Lokasi</strong><br>
+        <span class="block max-w-xs">{{ contact_info.address }}</span>
+      </p>
+      <p>
+        <strong>📱 WhatsApp</strong><br> 
+        <a href="https://wa.me/{{ contact_info.whatsapp_number }}" target="_blank">{{ contact_info.whatsapp_number }}</a>
+      </p>
+      <p>
+        <strong>📧 Email</strong><br> 
+        <a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a>
+      </p>
+      <p>
+        <strong>📸 Instagram</strong><br> 
+        {{ contact_info.description }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

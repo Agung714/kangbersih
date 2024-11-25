@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Blog{% endblock title %}
+
+{% block content %}
+<!-- <section class="container mx-auto py-10 px-5"> -->
+<section class="container mx-auto py-10 px-5 max-w-3xl">
+
+  <!-- Gambar dan Judul Artikel -->
+  <article class="mb-8">
+    <img src="{{ article.image.url }}" alt="Article Image" class="w-full rounded-lg mb-6">
+    <p class="text-gray-500 text-sm mb-2">Lorem ipsum</p>
+    <h1 class="text-3xl font-bold mb-3">{{ article.title }}</h1>
+    <div class="flex items-center gap-4 text-gray-600 text-sm">
+      <div class="flex items-center gap-1">
+        <i class="fas fa-heart cursor-pointer text-red-500" id="like-icon-{{ article.id }}"
+          onclick="toggleLike({{ article.id }})"></i>
+        <span id="like-count-{{ article.id }}">{{ article.likes.count }}</span>
+      </div>
+
+      <div class="flex items-center gap-1">
+        <i class="fas fa-comment"></i> {{ article.comments_count }}
+      </div>
+      <p>{{ article.created_at }}</p>
+    </div>
+    <p class="text-gray-700 mt-6 leading-relaxed">{{ article.content }}</p>
+  </article>
+  <!-- Garis Pemisah -->
+  <div class="relative flex items-center my-8">
+    <!-- Garis Kiri -->
+    <div class="flex-1 border-t border-black"></div>
+
+    <!-- SVG di Tengah -->
+    <div class="flex justify-center items-center w-12 h-12 bg-white mx-4">
+      <svg width="40" height="45" viewBox="0 0 40 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_793_781)">
+          <path
+            d="M39.375 26.0156C39.375 31.8428 34.6553 36.5625 28.8281 36.5625H28.125C26.5693 36.5625 25.3125 35.3057 25.3125 33.75C25.3125 32.1943 26.5693 30.9375 28.125 30.9375H28.8281C31.5439 30.9375 33.75 28.7314 33.75 26.0156V25.3125H28.125C25.0225 25.3125 22.5 22.79 22.5 19.6875V14.0625C22.5 10.96 25.0225 8.4375 28.125 8.4375H33.75C36.8525 8.4375 39.375 10.96 39.375 14.0625V16.875V19.6875V26.0156ZM16.875 26.0156C16.875 31.8428 12.1553 36.5625 6.32812 36.5625H5.625C4.06934 36.5625 2.8125 35.3057 2.8125 33.75C2.8125 32.1943 4.06934 30.9375 5.625 30.9375H6.32812C9.04395 30.9375 11.25 28.7314 11.25 26.0156V25.3125H5.625C2.52246 25.3125 0 22.79 0 19.6875V14.0625C0 10.96 2.52246 8.4375 5.625 8.4375H11.25C14.3525 8.4375 16.875 10.96 16.875 14.0625V16.875V19.6875V26.0156Z"
+            fill="black" />
+        </g>
+        <defs>
+          <clipPath id="clip0_793_781">
+            <rect width="39.375" height="45" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Garis Kanan -->
+    <div class="flex-1 border-t border-black"></div>
+  </div>
+
+
+
+  <!-- Komentar -->
+  <section class="mt-10">
+
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Komentar</h2>
+    {% if user.is_authenticated %}
+    <form method="POST">
+      {% csrf_token %}
+      <textarea name="content" placeholder="Tuliskan komentar Anda..." rows="3"
+        class="w-full p-4 border rounded-lg mb-3" required></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+        Kirim Komentar
+      </button>
+    </form>
+    {% else %}
+    <p>Anda harus <a href="{% url 'social:begin' 'google-oauth2' %}" class="text-blue-500 underline">login dengan
+        Google</a> untuk memberikan komentar.</p>
+    {% endif %}
+
+
+    <!-- List Komentar -->
+    <div class="space-y-6">
+      {% for comment in comments %}
+      <div class="p-4 border border-gray-200 rounded-lg">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-bold text-gray-800">{{ comment.user.username }}</span>
+          <span class="text-sm text-gray-500">{{ comment.created_at }}</span>
+        </div>
+        <p class="text-gray-700">{{ comment.content }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</section>
+
+
+<script>
+  function toggleLike(articleId) {
+    const likeIcon = document.getElementById(`like-icon-${articleId}`);
+    const likeCount = document.getElementById(`like-count-${articleId}`);
+
+    fetch("{% url 'like_article' pk=article.pk %}", {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json'
+      }
+    })
+
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          likeCount.textContent = data.like_count;
+          if (data.liked) {
+            likeIcon.classList.add('text-red-500');
+          } else {
+            likeIcon.classList.remove('text-red-500');
+          }
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  }
+</script>
+
+{% endblock content %}

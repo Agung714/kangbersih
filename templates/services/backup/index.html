@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Layanan{% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<!-- Hero Section -->
+<section class="text-center py-10 bg-gray-100">
+  <h1 class="text-4xl font-bold mb-3">Layanan Kami</h1>
+  <p class="text-lg">{{ service_page.text }}</p>
+</section>
+
+<!-- Service Cards -->
+<section class="flex flex-wrap justify-center px-5 py-10 gap-10">
+  <div class="w-full max-w-screen-md">
+    {% for layanan in service_page.layanan.all %}
+      <!-- Apply different background color based on whether the service index is odd or even --> 
+      <div class="{% if forloop.counter|divisibleby:2 %}bg-white{% else %}bg-custom-blue text-white{% endif %} w-full flex flex-wrap items-center px-5 py-8 rounded-lg mb-5">
+        <div class="w-full sm:w-1/2 md:w-1/4 p-3">
+          <img src="{{ layanan.gambar.url }}" alt="{{ layanan.nama_layanan }}" class="w-full h-auto mb-3">
+        </div>
+        <div class="w-full sm:w-1/2 md:w-3/4 p-3">
+          <h3 class="text-lg font-semibold">{{ layanan.nama_layanan }}</h3>
+          <p>{{ layanan.deskripsi_layanan }}.</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="text-center bg-custom-blue text-white py-10">
+  <h2 class="text-3xl font-semibold mb-3">Tertarik? Ayo Hubungi Kami!</h2>
+  <p class="mb-5">Lorem ipsum dolor sit amet consectetur. Ut lacinia vestibulum a nulla est urna a quam odio.</p>
+  <a href="https://wa.me/{{ whatsapp_number }}" class="inline-block bg-white text-custom-blue font-semibold py-2 px-4 rounded-full">
+  <!-- <a href="tel:+62123456789" class="inline-block bg-white text-custom-blue font-semibold py-2 px-4 rounded-full"> -->
+    Hubungi Kami
+  </a>
+</section>
+
+{% endblock content %}

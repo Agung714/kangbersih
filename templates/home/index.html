@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Beranda{% endblock title %}
+
+{% block content %}
+{# Hero START #} 
+<section data-hs-carousel='{
+  "loadingClasses": "opacity-0"
+  }' class="relative">
+  <div class="hs-carousel relative overflow-hidden w-full h-screen bg-gray-100">
+    <div
+      class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+      <div class="hs-carousel-slide">
+        <div class="h-screen flex flex-col relative">
+          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-50"
+            style="background-image: url('{{ content.image.url }}')"></div>
+            
+
+          <hgroup class="relative z-10 m-auto px-2.5 xs:px-5 md:px-10 lg:px-0 max-w-3xl">
+            <h1
+              class="block text-white font-bold text-2xl sm:text-4xl text-center mb-1 md:mb-2 md:text-5xl lg:text-6xl">
+              {{ content.title }}</h1>
+            <p class="block text-white text-center text-base sm:text-xl md:text-2xl">{{ content.texttitle }}</p>
+          </hgroup>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{# Hero END #}
+
+{# Layanan START #}
+<section class="flex flex-col justify-center px-3 py-5 xs:px-5 xs:py-7 sm:p-10">
+  <hgroup class="text-center mb-10">
+    <h2 class="text-3xl sm:text-4xl font-semibold mb-1">{{ content.SectionService }}</h2>
+    <p class="text-base sm:text-lg">{{ content.SectionServiceText }}</p>
+  </hgroup>
+
+  <div class="flex flex-wrap gap-5 justify-center sm:flex">
+    {% for service in services %}
+    <div class="flex flex-col w-full sm:flex-[1_0_45%] lg:flex-[1_0_22%] rounded-xl border shadow bg-white max-w-64">
+      <div class="px-4 md:px-5 py-1 bg-custom-blue rounded-t-xl">
+        <h3 class="text-lg font-bold text-white text-center">
+          {{ service.nama_layanan }}
+        </h3>
+      </div>
+      <img class="w-auto h-auto mx-3 mt-3 shadow md:mx-4 md:mt-4" src="{{ service.image.url }}" alt="Card Image">
+      <div class="p-3 flex-1 md:p-4">
+        <p class="text-gray-500 text-center">
+          {{ service.deskripsi }}
+        </p>
+      </div>
+    </div>
+
+    {% endfor %}
+    
+  </div>
+
+  <button type="button"
+    class="self-center py-2 px-4 mt-10 font-medium rounded-full bg-custom-blue text-white hover:ring-2 hover:ring-black">
+    Lihat Selengkapnya
+  </button>
+</section>
+{# Layanan END #}
+
+{# Promosi START #}
+<section
+  class="h-screen flex flex-col gap-10 md:flex-row-reverse justify-center items-center px-3 py-5 xs:px-5 xs:py-7 sm:py-20 sm:px-40 md:space-y-0 md:space-x-5 bg-custom-blue text-white">
+  <div class="flex-1">
+    <h2 class="text-3xl sm:text-4xl font-semibold mb-8">{{ content.content }}</h2>
+    <!-- <h2 class="text-3xl sm:text-4xl font-semibold mb-8">Rumah Bersih dengan Mudah</h2> -->
+    {% for item in items %}
+    <hgroup class="mb-2.5">
+      <h3 class="text-xl sm:text-2xl font-semibold mb-1">{{ item.item }}</h3>
+      <p class="text-base sm:text-lg">{{ item.description }}
+      </p>
+    </hgroup>
+
+    {% endfor %}
+    
+  </div>
+
+  <div style="display: flex; gap: 10px;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      {% if images|length > 0 %}
+        <img src="{{ images.0.image.url }}" alt="Image 1" style="width: 200px; height: 120px; object-fit: cover; margin-bottom: 10px;">
+      {% endif %}
+      {% if images|length > 1 %}
+        <img src="{{ images.1.image.url }}" alt="Image 2" style="width: 200px; height: 415px; object-fit: cover;">
+      {% endif %}
+    </div>
+    <div>
+      {% if images|length > 2 %}
+        <img src="{{ images.2.image.url }}" alt="Image 3" style="width: 200px; height: 543px; object-fit: cover;">
+      {% endif %}
+    </div>
+  </div>
+  
+</section>
+{# Promosi END #}
+
+{# Testimoni START #}
+<section class="flex flex-col justify-center px-3 py-5 xs:px-5 xs:py-7 sm:p-10">
+  <hgroup class="text-center mb-10">
+    <div class="flex items-center justify-center gap-4">
+      <hr class="border-t-[3px] border-black my-4 w-36">
+      <h2 class="text-3xl sm:text-4xl font-semibold mb-1">Apa Kata Mereka?</h2>
+      <hr class="border-t-[3px] border-black my-4 w-36">
+    </div>
+    <p class="text-base sm:text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, mollitia!</p>
+  </hgroup>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    {% for testimoni in testimoni_list %}
+    <div class="p-4 rounded-lg shadow" style="background-color: {% if forloop.counter|divisibleby:2 %}#5A72A0{% else %}#FDFFE2{% endif %};">
+      <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 16.875C0 11.6953 4.19531 7.5 9.375 7.5H10C11.3828 7.5 12.5 8.61719 12.5 10C12.5 11.3828 11.3828 12.5 10 12.5H9.375C6.96094 12.5 5 14.4609 5 16.875V17.5H10C12.7578 17.5 15 19.7422 15 22.5V27.5C15 30.2578 12.7578 32.5 10 32.5H5C2.24219 32.5 0 30.2578 0 27.5V25V22.5V16.875ZM20 16.875C20 11.6953 24.1953 7.5 29.375 7.5H30C31.3828 7.5 32.5 8.61719 32.5 10C32.5 11.3828 31.3828 12.5 30 12.5H29.375C26.9609 12.5 25 14.4609 25 16.875V17.5H30C32.7578 17.5 35 19.7422 35 22.5V27.5C35 30.2578 32.7578 32.5 30 32.5H25C22.2422 32.5 20 30.2578 20 27.5V25V22.5V16.875Z" fill="black"/>
+        </svg>
+      <h3 class="text-lg font-bold text-gray-900">{{ testimoni.nama }}</h3>
+      <p class="text-base text-gray-700 mt-2">{{ testimoni.isi_testimoni }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{# Testimoni END #}
+
+<!-- Section CTA -->
+<section style="background-color: #54759e; color: white; text-align: center; padding: 40px 20px;">
+  <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 10px;">Tertarik? Ayo Hubungi Kami!</h2>
+  <p style="margin-bottom: 20px;">Lorem ipsum dolor sit amet consectetur. Ut lacinia vestibulum a nulla est urna a quam odio.</p>
+  <a href="https://wa.me/{{ whatsapp_number }}" style="
+    display: inline-block;
+    background-color: white;
+    color: #54759e;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;">
+    Hubungi Kami
+  </a>
+</section>
+{% endblock content %}

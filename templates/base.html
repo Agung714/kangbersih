@@ -1,0 +1,196 @@
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{% endblock title %} | KangBersih</title>
+
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'dist/output.css' %}" />
+  {% endcompress %}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  {# Navbar START #}
+  <header class="fixed top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm">
+    <nav
+      class="relative max-w-3xl w-full bg-white border shadow border-gray-200 rounded-[2rem] mx-2 py-2.5 md:flex md:items-center md:justify-between md:py-0 md:px-4 md:mx-auto">
+      <div class="px-4 md:px-0 flex justify-between items-center">
+        <!-- Logo -->
+        <div>
+          <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
+             href="" aria-label="Preline">
+            <img src="{% static 'img/Logo.svg' %}" alt="Logo" style="height: 40px;">
+          </a>
+        </div>
+        
+        <!-- End Logo -->
+
+        <div class="md:hidden">
+          <!-- Toggle Button -->
+          <button type="button"
+            class="hs-collapse-toggle flex justify-center items-center size-6 border border-gray-200 text-gray-500 rounded-full hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
+            id="hs-navbar-header-floating-collapse" aria-expanded="false" aria-controls="hs-navbar-header-floating"
+            aria-label="Toggle navigation" data-hs-collapse="#hs-navbar-header-floating">
+            <svg class="hs-collapse-open:hidden shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <line x1="3" x2="21" y1="6" y2="6" />
+              <line x1="3" x2="21" y1="12" y2="12" />
+              <line x1="3" x2="21" y1="18" y2="18" />
+            </svg>
+            <svg class="hs-collapse-open:block hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+          <!-- End Toggle Button -->
+        </div>
+      </div>
+      <div id="hs-navbar-header-floating"
+      class="hidden hs-collapse overflow-hidden transition-all duration-300 basis-full grow md:block"
+      aria-labelledby="hs-navbar-header-floating-collapse">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-end gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0">
+    
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 
+                  {% if request.path == '/' %}border-gray-800 text-gray-800{% else %}border-transparent text-gray-500 hover:text-gray-800{% endif %} 
+                  focus:outline-none" 
+           href="/" aria-current="page">Beranda</a>
+    
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 
+                  {% if request.path == '/services' %}border-gray-800 text-gray-800{% else %}border-transparent text-gray-500 hover:text-gray-800{% endif %} 
+                  focus:outline-none" 
+           href="{% url 'services' %}">Layanan</a>
+    
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 
+                  {% if request.path == '/blog' %}border-gray-800 text-gray-800{% else %}border-transparent text-gray-500 hover:text-gray-800{% endif %} 
+                  focus:outline-none" 
+           href="{% url 'blog_home' %}">Blog</a>
+    
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 
+                  {% if request.path == '/about' %}border-gray-800 text-gray-800{% else %}border-transparent text-gray-500 hover:text-gray-800{% endif %} 
+                  focus:outline-none" 
+           href="{% url 'about' %}">Tentang Kami</a>
+    
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 
+                  {% if request.path == '/gallery' %}border-gray-800 text-gray-800{% else %}border-transparent text-gray-500 hover:text-gray-800{% endif %} 
+                  focus:outline-none" 
+           href="{% url 'gallery' %}">Galeri</a>
+    
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 
+                  {% if request.path == '/contact' %}border-gray-800 text-gray-800{% else %}border-transparent text-gray-500 hover:text-gray-800{% endif %} 
+                  focus:outline-none" 
+           href="{% url 'contact' %}">Kontak</a>
+    
+        {% if not user.is_authenticated %}
+          <a href="{% url 'social:begin' 'google-oauth2' %}" class="py-0.5 md:py-3 px-4 md:px-1 text-gray-500 hover:text-gray-800 focus:outline-none">Login with Google</a>
+        {% else %}
+          <form method="POST" action="{% url 'logout' %}" class="py-0.5 md:py-3 px-4 md:px-1">
+            {% csrf_token %}
+            <button type="submit" class="text-gray-500 hover:text-gray-800 focus:outline-none">Logout</button>
+          </form>
+        {% endif %}
+    
+        <div>
+          <a class="group inline-flex items-center gap-x-2 py-1 px-3 mx-4 md:mx-0 bg-custom-blue font-medium text-sm text-white rounded-full focus:outline-none"
+             href="https://wa.me/{{ whatsapp_number }}" target="_blank">
+            <i class="fa-solid fa-phone text-white"></i> Hubungi Kami
+          </a>
+        </div>
+      </div>
+    </div>
+     
+    </nav>
+  </header>
+  {# Navbar END #}
+
+  <main>
+    {% block content %} {% endblock content %}
+  </main>
+
+  {# Footer START #}
+  <footer class="bg-[#102616] text-white py-10">
+    <div class="max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Informasi Perusahaan -->
+      <div>
+        <h1 class="text-5xl font-bold">KangBersih</h1>
+
+        <!-- <h3 class="text-2xl font-bold">KangBersih</h3> -->
+        <address class="mt-3 text-sm leading-6">
+          Jalan Pangeran Suryanata, no. 22, Kel. Air Putih, Kec. Samarinda Ulu, Kota Samarinda, Provinsi Kalimantan
+          Timur, 75124
+        </address>
+        <div class="mt-4">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.848816733605!2d117.16964711585277!3d-0.49895363230826807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df67ea6617c5355%3A0x76a7fdfc63996ac9!2sJl.%20Pangeran%20Suryanata%2C%20Air%20Putih%2C%20Samarinda%20Ulu%2C%20Kota%20Samarinda%2C%20Kalimantan%20Timur%2075124!5e0!3m2!1sen!2sid!4v1666206179945!5m2!1sen!2sid"
+            width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <!-- <br> -->
+      <!-- <br> -->
+
+      <!-- Navigasi -->
+      <div class="col-span-2">
+        <br>
+        <br>
+        <br>
+        <div class="grid grid-cols-2 gap-4">
+          <ul class="space-y-2 text-sm">
+            <li><a href="/" class="hover:underline">BERANDA</a></li>
+            <li><a href="{% url 'services' %}" class="hover:underline">LAYANAN</a></li>
+            <li><a href="{% url 'about' %}" class="hover:underline">TENTANG</a></li>
+          </ul>
+          <ul class="space-y-2 text-sm">
+            <li><a href="{% url 'blog_home' %}" class="hover:underline">BLOG</a></li>
+            <li><a href="{% url 'gallery' %}" class="hover:underline">GALERI</a></li>
+            <li><a href="{% url 'contact' %}" class="hover:underline">TIM KAMI</a></li>
+          </ul>
+        </div>
+        <!-- Temukan Kami -->
+        <div class="mt-6">
+          <h4 class="text-lg font-semibold mb-4">Temukan Kami</h4>
+          <div class="flex items-center gap-3">
+            <a href="mailto:8ifarrel@gmail.com" class="hover:underline">
+              <img src="{% static 'img/Email.svg' %}" alt="Email" style="height: 40px;">
+            </a>
+            <a href="https://www.instagram.com/8ifarrel" class="hover:underline">
+              <img src="{% static 'img/Instagram.svg' %}" alt="Instagram" style="height: 40px;">
+            </a>
+            <a href="https://wa.me/{{ whatsapp_number }}" class="hover:underline">
+              <img src="{% static 'img/WhatsApp.svg' %}" alt="WhatsApp" style="height: 40px;">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Copyright -->
+    <div class="mt-10 border-t border-gray-700 pt-4 flex justify-between items-center text-sm">
+      <div>© 2024 KangBersih</div>
+    </div>
+  </footer>
+
+  {# Footer END #}
+
+  {# Script START #}
+  {% compress js %}
+  <script src="{% static 'dist/output.js' %}"></script>
+  {% endcompress %}
+  {% block script %}{% endblock script %}
+  {# Script END #}
+</body>
+
+</html>
+

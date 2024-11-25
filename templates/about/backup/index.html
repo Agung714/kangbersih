@@ -1,0 +1,35 @@
+<!-- about/templates/about/about.html -->
+<h1>{{ about_page.title }}</h1>
+<p>{{ about_page.StrukturUsaha}}</p>
+
+<h2>Visi</h2>
+<p>{{ about_page.visi }}</p>
+
+<h2>Misi</h2>
+<ul>
+    {% for misi in about_page.misi.all %}
+        <li>{{ misi.teks }}</li>
+    {% endfor %}
+</ul>
+
+<h2>{{ about_page.title_section }}</h2>
+<p>{{ about_page.teks_section }}</p>
+
+<div class="cards">
+    {% for card in about_page.cards.all %}
+        <div class="card">
+            {% if card.gambar %}
+                <img src="{{ card.gambar.url }}" alt="{{ card.nama }}">
+            {% endif %}
+            <h3>{{ card.nama }}</h3>
+            <p>{{ card.deskripsi }}</p>
+        </div>
+    {% endfor %}
+</div> 
+
+<h2>Gambar Tambahan</h2>
+<div class="additional-images">
+    {% for image in about_page.images.all %}
+        <img src="{{ image.image.url }}" alt="Additional Image">
+    {% endfor %}
+</div>

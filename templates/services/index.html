@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Layanan{% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<!-- Section Header dengan 4 Gambar -->
+<section style="display: flex; align-items: center; gap: 20px; padding: 30px 20px; max-width: 1200px; margin: auto;">
+  <!-- Bagian Gambar -->
+  <div style="display: grid; grid-template-columns: 200px auto; gap: 5px;">
+    <!-- Gambar besar di atas -->
+    <div style="grid-column: span 2; overflow: hidden; border-radius: 10px;">
+      <img src="{{ layanan.2.gambar.url }}" alt="Image 1" style="width: 100%; height: 200px; object-fit: cover;">
+    </div>
+  
+    <!-- Gambar kecil di kiri -->
+    <div style="display: flex; flex-direction: column; gap: 5px;">
+      <img src="{{ layanan.1.gambar.url }}" alt="Image 2" style="width: 100%; height: 120px; object-fit: cover;">
+      <img src="{{ layanan.3.gambar.url }}" alt="Image 3" style="width: 100%; height: 120px; object-fit: cover;">
+    </div>
+  
+    <!-- Gambar tinggi di kanan -->
+    <div style="overflow: hidden; border-radius: 10px;">
+      <img src="{{ layanan.0.gambar.url }}" alt="Image 4" style="width: 100%; height: 250px; object-fit: cover;">
+    </div>
+  </div>
+  
+
+  <!-- Bagian Teks -->
+  <div style="flex: 1; padding: 20px;">
+    <h1 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 10px; border-bottom: 2px solid black; display: inline-block;">Layanan Kami</h1>
+    <p style="font-size: 1.2rem; line-height: 1.6; margin-top: 20px;">{{ service_page.text }}</p>
+  </div>
+</section>
+
+<!-- Bagian Layanan -->
+<section style="padding: 30px 20px;">
+  <div style="max-width: 1000px; margin: auto;">
+    {% for layanan in service_page.layanan.all %}
+    <div style="
+      display: flex;
+      flex-direction: {% if forloop.counter|divisibleby:2 %}row-reverse{% else %}row{% endif %};
+      align-items: center;
+      background-color: {% if forloop.counter|divisibleby:2 %}white{% else %}#54759e{% endif %};
+      color: {% if forloop.counter|divisibleby:2 %}black{% else %}white{% endif %};
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%; /* Menjadikan elemen memenuhi lebar kontainer */
+      box-sizing: border-box; /* Pastikan padding tidak menambah ukuran total */
+    ">
+      <!-- Gambar -->
+      <div style="flex: 1; padding: 10px;">
+        <img src="{{ layanan.gambar.url }}" alt="{{ layanan.nama_layanan }}" style="
+          width: 100%; 
+          height: auto; 
+          border-radius: 10px; 
+          display: block; /* Hilangkan spasi bawah gambar */
+        ">
+      </div>
+      <!-- Teks -->
+      <div style="flex: 1; padding: 10px;">
+        <h3 style="font-size: 1.5rem; font-weight: bold;">{{ layanan.nama_layanan }}</h3>
+        <p style="line-height: 1.5;">{{ layanan.deskripsi_layanan }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+<!-- Section CTA -->
+<section style="background-color: #54759e; color: white; text-align: center; padding: 40px 20px;">
+  <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 10px;">{{service_page.section_title}}</h2>
+  <p style="margin-bottom: 20px;">{{service_page.section_text}}</p>
+  <a href="https://wa.me/{{ whatsapp_number }}" style="
+    display: inline-block;
+    background-color: white;
+    color: #54759e;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;">
+    Hubungi Kami
+  </a>
+</section>
+{% endblock content %}

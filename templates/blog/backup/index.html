@@ -1,0 +1,46 @@
+<!-- templates/blog/home.html -->
+<section class="py-10">
+    <h1 class="text-center text-4xl font-semibold mb-10">Blog KangBersih</h1>
+  
+    <div class="flex gap-5">
+      <!-- Terbaru -->
+      <div class="flex flex-col w-1/3">
+        <h2 class="text-2xl font-semibold mb-5">Artikel Terbaru</h2>
+        {% for article in latest_articles %}
+        <div class="card">
+          <img src="{{ article.image.url }}" alt="Article Image">
+          <h3><a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a></h3>
+          <p>{{ article.created_at }}</p>
+          <p>Likes: {{ article.likes }} | Comments: {{ article.comments_count }}</p>
+        </div>
+        {% endfor %}
+      </div>
+  
+      <!-- Terfavorit -->
+      <div class="flex flex-col w-1/3">
+        <h2 class="text-2xl font-semibold mb-5">Artikel Terfavorit</h2>
+        {% for article in favorite_articles %}
+        <div class="card">
+          <img src="{{ article.image.url }}" alt="Article Image">
+          <h3><a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a></h3>
+          <p>{{ article.created_at }}</p>
+          <p>Likes: {{ article.likes }} | Comments: {{ article.comments_count }}</p>
+        </div>
+        {% endfor %}
+      </div>
+  
+      <!-- Teramai -->
+      <div class="flex flex-col w-1/3">
+        <h2 class="text-2xl font-semibold mb-5">Artikel Teramai</h2>
+        {% for article in popular_articles %}
+        <div class="card">
+          <img src="{{ article.image.url }}" alt="Article Image">
+          <h3><a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a></h3>
+          <p>{{ article.created_at }}</p>
+          <p>Likes: {{ article.likes }} | Comments: {{ article.comments_count }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  

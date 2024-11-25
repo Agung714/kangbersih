@@ -1,0 +1,16 @@
+<!-- templates/blog/all_articles.html -->
+<section class="py-10">
+    <h1 class="text-center text-4xl font-semibold mb-10">Semua Artikel</h1>
+  
+    <div class="flex flex-wrap gap-5">
+      {% for article in articles %}
+      <div class="card">
+        <img src="{{ article.image.url }}" alt="Article Image">
+        <h3><a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a></h3>
+        <p>{{ article.created_at }}</p>
+        <p>Likes: {{ article.likes }} | Comments: {{ article.comments_count }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  

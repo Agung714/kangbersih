@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Galeri{% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<section class="py-10">
+  <h1 class="text-4xl font-semibold text-center mb-5">Galeri Kami</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+    {% for image in images %}
+      <div class="bg-white shadow rounded overflow-hidden">
+        <img src="{{ image.image.url }}" alt="" class="w-full h-48 object-cover">
+        
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

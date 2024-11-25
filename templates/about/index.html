@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Tentang Kami{% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<section class="text-center px-5 py-10">
+    <h1 class="text-4xl font-semibold mb-2">{{ about_page.title }}</h1>
+    <p class="text-lg text-gray-600 mb-10">
+        {{ about_page.StrukturUsaha}}</p>
+</section>
+
+<section class="bg-custom-blue text-white py-10">
+    <div class="container mx-auto px-5">
+        <h2 class="text-3xl font-bold mb-4">Visi KangBersih</h2>
+        <p class="text-lg mb-8" style="display: flex; align-items: center; gap: 10px;">
+            <svg width="35" height="26" viewBox="0 0 35 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0 9.875C0 4.69531 4.19531 0.5 9.375 0.5H10C11.3828 0.5 12.5 1.61719 12.5 3C12.5 4.38281 11.3828 5.5 10 5.5H9.375C6.96094 5.5 5 7.46094 5 9.875V10.5H10C12.7578 10.5 15 12.7422 15 15.5V20.5C15 23.2578 12.7578 25.5 10 25.5H5C2.24219 25.5 0 23.2578 0 20.5V18V15.5V9.875ZM20 9.875C20 4.69531 24.1953 0.5 29.375 0.5H30C31.3828 0.5 32.5 1.61719 32.5 3C32.5 4.38281 31.3828 5.5 30 5.5H29.375C26.9609 5.5 25 7.46094 25 9.875V10.5H30C32.7578 10.5 35 12.7422 35 15.5V20.5C35 23.2578 32.7578 25.5 30 25.5H25C22.2422 25.5 20 23.2578 20 20.5V18V15.5V9.875Z"
+                    fill="white" />
+            </svg>
+            {{ about_page.visi }}
+            <svg width="40" height="45" viewBox="0 0 40 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_773_452)">
+                    <path
+                        d="M39.375 26.0156C39.375 31.8428 34.6553 36.5625 28.8281 36.5625H28.125C26.5693 36.5625 25.3125 35.3057 25.3125 33.75C25.3125 32.1943 26.5693 30.9375 28.125 30.9375H28.8281C31.5439 30.9375 33.75 28.7314 33.75 26.0156V25.3125H28.125C25.0225 25.3125 22.5 22.79 22.5 19.6875V14.0625C22.5 10.96 25.0225 8.4375 28.125 8.4375H33.75C36.8525 8.4375 39.375 10.96 39.375 14.0625V16.875V19.6875V26.0156ZM16.875 26.0156C16.875 31.8428 12.1553 36.5625 6.32812 36.5625H5.625C4.06934 36.5625 2.8125 35.3057 2.8125 33.75C2.8125 32.1943 4.06934 30.9375 5.625 30.9375H6.32812C9.04395 30.9375 11.25 28.7314 11.25 26.0156V25.3125H5.625C2.52246 25.3125 0 22.79 0 19.6875V14.0625C0 10.96 2.52246 8.4375 5.625 8.4375H11.25C14.3525 8.4375 16.875 10.96 16.875 14.0625V16.875V19.6875V26.0156Z"
+                        fill="white" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_773_452">
+                        <rect width="39.375" height="45" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+        </p>
+        <h2
+            style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem; border-bottom: 2px solid white; padding-bottom: 0.5rem;">
+            Misi KangBersih
+        </h2>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            {% for misi in about_page.misi.all %}
+            <li style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <!-- Kotak Nomor -->
+                <div style="
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: white;
+                    color: black;
+                    font-weight: bold;
+                    border-radius: 5px;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+                    margin-right: 1rem;">
+                    {{ forloop.counter }}
+                </div>
+                <!-- Teks Misi -->
+                <span style="font-size: 1rem; color: white;">
+                    {{ misi.teks }}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+
+    </div>
+</section>
+
+<section class="text-center px-5 py-10">
+    <h2 class="text-4xl font-semibold mb-2">{{ about_page.title_section }}</h2>
+    <p class="text-lg text-gray-600 mb-10">{{ about_page.teks_section }}</p>
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {% for card in about_page.cards.all %}
+        <div class="text-center">
+            {% if card.gambar %}
+            <img src="{{ card.gambar.url }}" alt="{{ card.nama }}" class="w-48 h-48 mx-auto rounded-md shadow-lg mb-4">
+            {% endif %}
+            <!-- <img src="{% static 'images/farrel_profile.png' %}" alt="Muhammad Farrel Sirah" class="w-48 h-48 mx-auto rounded-md shadow-lg mb-4"> -->
+            <h3 class="text-xl font-semibold">{{ card.nama }}</h3>
+            <p class="text-gray-600">{{ card.deskripsi }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</section>
+
+<!-- <footer class="bg-dark-green text-white py-10">
+    <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-5">
+        <div class="text-center sm:text-left">
+            <h2 class="text-3xl font-bold">KangBersih</h2>
+            <p>Jalan Pangeran Suryanata, no. 22, Kel. Air Putih, Kec. Samarinda Ulu, Kota Samarinda, Provinsi Kalimantan
+                Timur, 75124</p>
+        </div>
+
+        <div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.848816733605!2d117.16964711585277!3d-0.49895363230826807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df67ea6617c5355%3A0x76a7fdfc63996ac9!2sJl.%20Pangeran%20Suryanata%2C%20Air%20Putih%2C%20Samarinda%20Ulu%2C%20Kota%20Samarinda%2C%20Kalimantan%20Timur%2075124!5e0!3m2!1sen!2sid!4v1666206179945!5m2!1sen!2sid"
+                width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="text-center sm:text-right">
+            <h3 class="font-semibold mb-2">Temukan Kami</h3>
+            <div class="flex justify-center sm:justify-end gap-4">
+                <a href="mailto:8ifarrel@gmail.com"><img src="{% static 'icons/email.svg' %}" alt="Email"
+                        class="w-6 h-6"></a>
+                <a href="https://www.instagram.com/8ifarrel"><img src="{% static 'icons/instagram.svg' %}"
+                        alt="Instagram" class="w-6 h-6"></a>
+                <a href="https://wa.me/6281369833657"><img src="{% static 'icons/whatsapp.svg' %}" alt="WhatsApp"
+                        class="w-6 h-6"></a>
+            </div>
+        </div>
+    </div>
+</footer> -->
+{% endblock content %}

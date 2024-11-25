@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <div>
+        <h2>Alamat</h2>
+        {% if contact_info.maps_link %}
+            <a href="{{ contact_info.maps_link }}" target="_blank">Google Maps</a>
+        {% endif %}
+        <p>{{ contact_info.address }}</p>
+    </div>
+    <div>
+        <h2>Kontak Kami</h2>
+        <p>No WhatsApp: <a href="https://wa.me/{{ contact_info.whatsapp_number }}" target="_blank">{{ contact_info.whatsapp_number }}</a></p>
+        <p>Email: <a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a></p>
+    </div>
+    <div>
+        <h2>Informasi Tambahan</h2>
+        <p>{{ contact_info.description }}</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Layanan{% endblock title %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="text-center py-10 bg-gray-100">
+  <h1 class="text-4xl font-bold mb-3">Layanan Kami</h1>
+  <p class="text-lg">Lorem ipsum dolor sit amet consectetur. Arcu nunc vitae ipsum enim condimentum morbi ac sed eget.</p>
+</section>
+
+<!-- Service Cards -->
+<section class="flex flex-wrap justify-center px-5 py-10 gap-10">
+  <div class="w-full max-w-screen-md flex flex-wrap justify-center gap-5">
+    <div class="w-full sm:w-1/2 md:w-1/4">
+      <img src="{% static 'img/ac_service.jpg' %}" alt="AC Service" class="w-full h-auto mb-3">
+      <h3 class="text-lg font-semibold">AC</h3>
+      <p></strong>.</p>
+    </div>
+    <div class="w-full sm:w-1/2 md:w-1/4">
+      <img src="{% static 'img/hydro_cleaning.jpg' %}" alt="Hydro Cleaning" class="w-full h-auto mb-3">
+      <h3 class="text-lg font-semibold"></h3>
+      <p></strong>.</p>
+    </div>
+    <div class="w-full sm:w-1/2 md:w-1/4">
+      <img src="{% static 'img/general_cleaning.jpg' %}" alt="General Cleaning" class="w-full h-auto mb-3">
+      <h3 class="text-lg font-semibold">General Cleaning</h3>
+      <p></strong>.</p>
+    </div>
+    <div class="w-full sm:w-1/2 md:w-1/4">
+      <img src="{% static 'img/deep_cleaning.jpg' %}" alt="Deep Cleaning" class="w-full h-auto mb-3">
+      <h3 class="text-lg font-semibold"></h3>
+      <p></p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="text-center bg-custom-blue text-white py-10">
+  <h2 class="text-3xl font-semibold mb-3">Tertarik? Ayo Hubungi Kami!</h2>
+  <p class="mb-5">Lorem ipsum dolor sit amet consectetur. Ut lacinia vestibulum a nulla est urna a quam odio.</p>
+  <a href="tel:+62123456789" class="inline-block bg-white text-custom-blue font-semibold py-2 px-4 rounded-full">
+    Hubungi Kami
+  </a>
+</section>
+
+<!-- Footer -->
+<footer class="bg-green-900 text-white py-10">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center">
+    <div>
+      <h3 class="text-2xl font-bold">KangBersih</h3>
+      <address class="mt-3">Jalan Pangeran Suryanata, no. 22, Kel. Air Putih, Kec. Samarinda Ulu, Kota Samarinda, Provinsi Kalimantan Timur, 75124</address>
+    </div>
+    <div class="space-y-2">
+      <h4 class="text-lg font-semibold">Temukan Kami</h4>
+      <div class="flex gap-3">
+        <a href="#" class="hover:underline">Email</a>
+        <a href="#" class="hover:underline">Instagram</a>
+        <a href="#" class="hover:underline">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock content %}

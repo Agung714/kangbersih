@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Galeri{% endblock title %}
+
+{% block content %}
+<section class="py-10">
+  <div class="container mx-auto">
+    <h1 class="text-4xl font-semibold text-center mb-10">Galeri Kami</h1>
+
+    <!-- Responsive Grid untuk Gambar -->
+    <div class="grid grid-cols-4 gap-4 auto-rows-[200px]">
+      {% for image in page_obj %}
+      {% if forloop.counter == 1 %}
+      <!-- Gambar Pertama (Besar) -->
+      <div class="col-span-2 row-span-2 bg-white shadow rounded overflow-hidden">
+        <img src="{{ image.image.url }}" alt="Gallery Image" class="w-full h-full object-cover">
+      </div>
+      {% elif forloop.counter == 2 or forloop.counter == 3 %}
+      <!-- Gambar Kedua & Ketiga (Sedang) -->
+      <div class="col-span-1 bg-white shadow rounded overflow-hidden">
+        <img src="{{ image.image.url }}" alt="Gallery Image" class="w-full h-full object-cover">
+      </div>
+      {% elif forloop.counter == 4 %}
+      <!-- Gambar Keempat (Tinggi) -->
+      <div class="col-span-1 row-span-2 bg-white shadow rounded overflow-hidden">
+        <img src="{{ image.image.url }}" alt="Gallery Image" class="w-full h-full object-cover">
+      </div>
+      {% else %}
+      <!-- Gambar Lainnya -->
+      <div class="col-span-1 bg-white shadow rounded overflow-hidden">
+        <img src="{{ image.image.url }}" alt="Gallery Image" class="w-full h-full object-cover">
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center mt-8">
+      <ul class="inline-flex items-center space-x-1">
+        {% if page_obj.has_previous %}
+        <li>
+          <a href="?page={{ articles.previous_page_number }}{% if query %}&search={{ query }}{% endif %}"
+            class="text-gray-600 hover:underline">&lt;</a>
+        </li>
+
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        <li>
+          <a href="?page={{ num }}{% if query %}&search={{ query }}{% endif %}"
+            class="text-gray-600 hover:underline {% if page_obj.number == num %}underline text-black{% endif %}">
+            {{ num }}
+          </a>
+        </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li>
+          <a href="?page={{ articles.next_page_number }}{% if query %}&search={{ query }}{% endif %}"
+            class="text-gray-600 hover:underline">&gt;</a>
+        </li>
+        {% endif %}
+
+        {% for num in page_obj.page_range %}
+        {% if page_obj.number == num %}
+        <li>
+          <span class="px-4 py-2 border rounded bg-blue-500 text-white">{{ num }}</span>
+        </li>
+        {% else %}
+        <li>
+          <a href="?page={{ num }}" class="px-4 py-2 border rounded hover:bg-gray-200">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+      </ul>
+    </div>
+    <!-- end pagination -->
+  </div>
+</section>
+{% endblock %}

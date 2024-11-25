@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% load static %}
+ 
+{% block title %}Beranda{% endblock title %}
+ 
+{% block content %} 
+{# Hero START #}
+<section data-hs-carousel='{
+  "loadingClasses": "opacity-0"
+  }' class="relative">
+  <div class="hs-carousel relative overflow-hidden w-full h-screen bg-gray-100">
+    <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+      <div class="hs-carousel-slide">
+        <div class="h-screen flex flex-col relative">
+          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-50" style="background-image: url('{% static 'img/hero.jpg' %}')"></div>
+          
+          <hgroup class="relative z-10 m-auto px-2.5 xs:px-5 md:px-10 lg:px-0 max-w-3xl">
+            <h1 class="block text-white font-bold text-2xl sm:text-4xl text-center mb-1 md:mb-2 md:text-5xl lg:text-6xl">{{ content.title }}</h1>
+            <!-- <h1 class="block text-white font-bold text-2xl sm:text-4xl text-center mb-1 md:mb-2 md:text-5xl lg:text-6xl">JASA CLEANING SERVICE TERBAIK DI SAMARINDA!</h1> -->
+            <p class="block text-white text-center text-base sm:text-xl md:text-2xl">{{ content.texttitle }}</p>
+            <!-- <p class="block text-white text-center text-base sm:text-xl md:text-2xl">Lorem ipsum dolor, sit amet consectetur adipisicing elit amet voluptas veniam!</p> -->
+          </hgroup>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{# Hero END #}
+
+{# Layanan START #}
+<section class="py-10">
+  <hgroup class="flex flex-col justify-center text-center mb-10">
+    <h1 class="text-4xl font-semibold mb-1">{{ content.SectionService }}</h1>
+    <!-- <h1 class="text-4xl font-semibold mb-1">Layanan dari KangBersih</h1> -->
+    <p class="text-lg">{{ content.SectionServiceText }}</p>
+    <!-- <p class="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, mollitia!</p> -->
+    <p></p>
+  </hgroup>
+
+  <div class="grid gap-5 justify-center sm:flex px-10">
+    {% for service in services %}
+    <div class="flex flex-col flex-[1_0_0%] rounded-xl border shadow bg-white max-w-64">
+      <div class="px-4 md:px-5 py-1 bg-custom-blue rounded-t-xl">
+        <h3 class="text-lg font-bold text-white text-center">
+          {{ service.nama_layanan }}
+        </h3>
+      </div>
+      <!-- <img class="w-auto h-auto mx-2 mt-2 shadow md:mx-4 md:mt-4" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80" alt="Card Image"> -->
+      <img class="w-auto h-auto mx-2 mt-2 shadow md:mx-4 md:mt-4" src="{{ service.image.url }}" alt="Card Image">
+      <div class="p-2 flex-1 md:p-4">
+        <p class="text-gray-500 text-center">
+          {{ service.deskripsi }}
+          <!-- This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. -->
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- <div class="flex flex-col flex-[1_0_0%] rounded-xl border shadow bg-white max-w-64">
+      <div class="px-4 md:px-5 py-1 bg-custom-blue rounded-t-xl">
+        <h3 class="text-lg font-bold text-white text-center">
+          Card title
+        </h3>
+      </div>
+      <img class="w-auto h-auto mx-2 mt-2 shadow md:mx-4 md:mt-4" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80" alt="Card Image">
+      <div class="p-2 flex-1 md:p-4">
+        <p class="text-gray-500 text-center">
+          This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        </p>
+      </div>
+    </div>
+  
+    <div class="flex flex-col flex-[1_0_0%] rounded-xl border shadow bg-white max-w-64">
+      <div class="px-4 md:px-5 py-1 bg-custom-blue rounded-t-xl">
+        <h3 class="text-lg font-bold text-white text-center">
+          Card title
+        </h3>
+      </div>
+      <img class="w-auto h-auto mx-2 mt-2 shadow md:mx-4 md:mt-4" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80" alt="Card Image">
+      <div class="p-2 flex-1 md:p-4">
+        <p class="text-gray-500 text-center">
+          This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-col flex-[1_0_0%] rounded-xl border shadow bg-white max-w-64">
+      <div class="px-4 md:px-5 py-1 bg-custom-blue rounded-t-xl">
+        <h3 class="text-lg font-bold text-white text-center">
+          Card title
+        </h3>
+      </div>
+      <img class="w-auto h-auto mx-2 mt-2 shadow md:mx-4 md:mt-4" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80" alt="Card Image">
+      <div class="p-2 flex-1 md:p-4">
+        <p class="text-gray-500 text-center">
+          This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        </p>
+      </div>
+    </div> -->
+  </div>
+</section>
+{# Layanan END #}
+{% endblock content %}

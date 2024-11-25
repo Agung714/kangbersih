@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Logout{% endblock title %}
+
+{% block content %}
+<section class="py-10 text-center">
+    <h1 class="text-4xl font-bold mb-5">Anda telah keluar</h1>
+    <a href="{% url 'account_login' %}" class="text-blue-600 hover:underline">Login Lagi</a>
+</section>
+{% endblock content %}
